@@ -1,0 +1,39 @@
+CREATE OR REPLACE TABLE dim_users as(
+Select user_id from orders
+);
+
+CREATE OR REPLACE TABLE dim_products as(
+Select product_id, product_name from products
+);
+
+CREATE OR REPLACE TABLE dim_aisles as(
+Select aisle_id, aisle from aisles
+);
+
+CREATE OR REPLACE TABLE dim_departments as(
+Select department_id, department from departments
+);
+
+CREATE OR REPLACE TABLE dim_orders as(
+Select order_id, order_number, order_dow, order_hour_of_day, days_since_prior_order from orders
+);
+
+CREATE OR REPLACE TABLE fact_order_product as(
+Select op.order_id, op.product_id, o.user_id, p.department_id, p.aisle_id, op.add_to_cart_order, op.reordered
+from order_products op
+JOIN orders o ON op.order_id = o.order_id
+JOIN products p ON op.product_id = p.product_id
+);
+
+SELECT
+    d.department,
+    COUNT(*) AS total_products_ordered
+FROM
+    fact_order_product AS fop
+JOIN
+    dim_departments   AS d
+      ON fop.department_id = d.department_id
+GROUP BY
+    d.department;
+
+
