@@ -1,2 +1,6 @@
 # E-commerce-DM-Snowflake
-https://github.com/ambdasa/E-commerce-DM-Snowflake/blob/main/e-commerce_DM.png
+
+![E-commerce Data Model](https://raw.githubusercontent.com/ambdasa/E-commerce-DM-Snowflake/main/e-commerce_DM.png)
+
+
+
